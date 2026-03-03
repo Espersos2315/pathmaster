@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PathMaster | Focus Terminal</title>
+    <title>PathMaster | Neural Cards</title>
     <style>
         :root {
-            --accent: #ff3e3e; /* Rojo neón para urgencia y enfoque */
-            --bg: #0a0a0a;
-            --surface: #111111;
-            --text: #e0e0e0;
+            --bg: #000000;
+            --accent: #7000ff; /* Púrpura eléctrico */
+            --card-bg: #111;
+            --text: #ffffff;
         }
 
         body {
             background-color: var(--bg);
             color: var(--text);
-            font-family: 'Courier New', Courier, monospace; /* Estilo terminal */
+            font-family: 'Inter', sans-serif;
             margin: 0;
             display: flex;
             flex-direction: column;
@@ -24,154 +24,143 @@
             padding: 20px;
         }
 
-        .terminal-header {
-            text-align: left;
+        .hero {
+            text-align: center;
+            margin-top: 50px;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            letter-spacing: -2px;
+            background: linear-gradient(to right, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .input-box {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            padding: 5px;
+            border-radius: 50px;
+            display: flex;
             width: 100%;
-            max-width: 500px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-        }
-
-        .timer-display {
-            font-size: 5rem;
-            font-weight: bold;
-            color: var(--accent);
-            text-shadow: 0 0 20px rgba(255, 62, 62, 0.3);
-            margin: 20px 0;
-        }
-
-        .controls button {
-            background: transparent;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            padding: 10px 20px;
-            font-family: inherit;
-            cursor: pointer;
-            transition: 0.3s;
-            margin: 5px;
-        }
-
-        .controls button:hover {
-            background: var(--accent);
-            color: black;
-        }
-
-        .task-section {
-            width: 100%;
-            max-width: 500px;
-            background: var(--surface);
-            padding: 20px;
-            border-radius: 4px;
-            border: 1px solid #222;
+            max-width: 400px;
+            margin: 30px auto;
         }
 
         input {
-            width: 70%;
             background: transparent;
             border: none;
-            border-bottom: 1px solid #444;
             color: white;
-            padding: 10px;
+            padding: 15px 20px;
+            flex: 1;
             outline: none;
+            font-size: 1rem;
         }
 
-        .task-list {
-            list-style: none;
-            padding: 0;
+        .btn-gen {
+            background: var(--accent);
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .deck {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 900px;
             margin-top: 20px;
         }
 
-        .task-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #1a1a1a;
+        .flashcard {
+            background: var(--card-bg);
+            border: 1px solid #222;
+            padding: 30px;
+            border-radius: 24px;
+            transition: 0.4s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flashcard:hover {
+            border-color: var(--accent);
+            transform: translateY(-10px);
+        }
+
+        .card-num {
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .card-content {
+            color: #888;
             font-size: 0.9rem;
+            line-height: 1.6;
         }
 
-        .done { text-decoration: line-through; color: #555; }
-
-        footer {
-            margin-top: auto;
-            font-size: 0.7rem;
-            color: #444;
-            padding: 20px;
-        }
+        footer { margin-top: auto; padding: 40px; color: #333; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-    <div class="terminal-header">
-        <div>> SYSTEM: ONLINE</div>
-        <div>> USER: MARLON_DEV</div>
-        <div style="color: var(--accent)">> STATUS: FOCUS_MODE_ACTIVE</div>
+    <div class="hero">
+        <h1>PathMaster AI</h1>
+        <p style="color:#555">Transforma cualquier tema en un sistema de aprendizaje visual.</p>
     </div>
 
-    <div class="timer-display" id="timer">25:00</div>
-
-    <div class="controls">
-        <button onclick="toggleTimer()">START / STOP</button>
-        <button onclick="resetTimer()">RESET</button>
+    <div class="input-box">
+        <input type="text" id="topic" placeholder="¿Qué quieres dominar?">
+        <button class="btn-gen" onclick="generateCards()">GENERAR</button>
     </div>
 
-    <div class="task-section">
-        <div style="margin-bottom: 15px;">// PRIORIDADES_DEL_DÍA</div>
-        <input type="text" id="taskInput" placeholder="Añadir objetivo...">
-        <button onclick="addTask()" style="width: 25%; padding: 10px;">+</button>
-        <ul class="task-list" id="taskList"></ul>
-    </div>
+    <div class="deck" id="deck">
+        </div>
 
     <footer>
-        PATHMASTER TERMINAL v2.0 // NO DISTRACTIONS ALLOWED
+        DESIGNED BY GEMINI AI // OWNED BY MARLON_DEV
     </footer>
 
     <script>
-        // Lógica del Temporizador (Pomodoro)
-        let timeLeft = 25 * 60;
-        let timerId = null;
+        function generateCards() {
+            const topic = document.getElementById('topic').value;
+            const deck = document.getElementById('deck');
+            
+            if(!topic) return;
 
-        function updateDisplay() {
-            const mins = Math.floor(timeLeft / 60);
-            const secs = timeLeft % 60;
-            document.getElementById('timer').innerText = 
-                `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-        }
+            // La IA decide la estructura de aprendizaje perfecta
+            const templates = [
+                { t: "Fundamentos Nucleares", c: "Los conceptos base que sostienen todo el conocimiento sobre " + topic + "." },
+                { t: "Herramientas de Poder", c: "El software o materiales críticos que necesitas para ejecutar " + topic + " a nivel pro." },
+                { t: "La Regla del 80/20", c: "El 20% de la información sobre " + topic + " que te dará el 80% de los resultados." },
+                { t: "Errores de Novato", c: "Lo que el 90% hace mal al empezar y cómo tú puedes evitarlo." }
+            ];
 
-        function toggleTimer() {
-            if (timerId) {
-                clearInterval(timerId);
-                timerId = null;
-            } else {
-                timerId = setInterval(() => {
-                    if (timeLeft > 0) {
-                        timeLeft--;
-                        updateDisplay();
-                    }
-                }, 1000);
-            }
-        }
-
-        function resetTimer() {
-            clearInterval(timerId);
-            timerId = null;
-            timeLeft = 25 * 60;
-            updateDisplay();
-        }
-
-        // Lógica de Tareas
-        function addTask() {
-            const input = document.getElementById('taskInput');
-            if (input.value.trim() === "") return;
-
-            const li = document.createElement('li');
-            li.className = 'task-item';
-            li.innerHTML = `
-                <span onclick="this.classList.toggle('done')">${input.value}</span>
-                <span onclick="this.parentElement.remove()" style="cursor:pointer; color:red">X</span>
-            `;
-            document.getElementById('taskList').appendChild(li);
-            input.value = "";
+            deck.innerHTML = "";
+            templates.forEach((card, i) => {
+                deck.innerHTML += `
+                    <div class="flashcard">
+                        <div class="card-num">MODULO 0${i+1}</div>
+                        <div class="card-title">${card.t}</div>
+                        <div class="card-content">${card.c}</div>
+                    </div>
+                `;
+            });
         }
     </script>
 </body>
