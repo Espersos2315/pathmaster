@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PathMaster AI | Neural Interface</title>
+    <title>PathMaster | Local Services</title>
     <style>
         :root {
             --bg: #000000;
-            --accent: #00d4ff;
+            --accent: #00ff88; /* Verde neón: color de dinero y servicios */
             --card-bg: #0a0a0a;
             --border: #1a1a1a;
             --text: #ffffff;
@@ -29,20 +29,29 @@
             width: 100%;
             max-width: 900px;
             text-align: center;
-            margin-top: 60px;
+            margin-top: 50px;
+        }
+
+        .badge {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--accent);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border: 1px solid var(--accent);
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 800;
-            letter-spacing: -3px;
-            margin: 0;
-            color: var(--text);
+            letter-spacing: -2px;
+            margin: 15px 0 5px 0;
         }
 
         p.subtitle {
-            color: #555;
-            font-size: 1.1rem;
+            color: #666;
             margin-bottom: 40px;
         }
 
@@ -54,12 +63,6 @@
             display: flex;
             max-width: 500px;
             margin: 0 auto 50px auto;
-            transition: 0.3s;
-        }
-
-        .input-group:focus-within {
-            border-color: var(--accent);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
         }
 
         input {
@@ -80,129 +83,145 @@
             border-radius: 12px;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.2s;
         }
 
-        .btn-main:hover {
-            transform: scale(1.05);
-            background: #fff;
-        }
-
-        .deck {
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
             width: 100%;
         }
 
-        .card {
+        .service-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            padding: 30px;
+            padding: 25px;
             border-radius: 20px;
             text-align: left;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: block;
+            transition: 0.3s;
+            position: relative;
         }
 
-        .card:hover {
+        .service-card:hover {
             border-color: var(--accent);
-            background: #0d0d0d;
-            transform: translateY(-8px);
+            transform: translateY(-5px);
         }
 
-        .card-tag {
-            font-size: 0.7rem;
+        .price {
+            position: absolute;
+            top: 25px;
+            right: 25px;
             color: var(--accent);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .category {
+            font-size: 0.7rem;
+            color: #555;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             display: block;
         }
 
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 700;
+        .title {
+            font-size: 1.2rem;
+            font-weight: bold;
             margin-bottom: 10px;
         }
 
-        .card-desc {
-            font-size: 0.9rem;
-            color: #777;
+        .desc {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
             line-height: 1.5;
+        }
+
+        .contact-btn {
+            display: block;
+            text-align: center;
+            background: #111;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            border: 1px solid #222;
+            transition: 0.3s;
+        }
+
+        .contact-btn:hover {
+            background: var(--accent);
+            color: black;
         }
 
         footer {
             margin-top: auto;
-            padding: 60px 20px;
-            color: #222;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
+            padding: 40px;
+            color: #333;
+            font-size: 0.8rem;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>PathMaster</h1>
-        <p class="subtitle">Decodifica cualquier habilidad en segundos.</p>
+        <span class="badge">DISPONIBLE EN TU CIUDAD</span>
+        <h1>LocalServices</h1>
+        <p class="subtitle">Micro-servicios digitales rápidos y garantizados.</p>
 
         <div class="input-group">
-            <input type="text" id="topicInput" placeholder="¿Qué quieres aprender?" onkeydown="if(event.key === 'Enter') generateCards()">
-            <button class="btn-main" onclick="generateCards()">GENERAR</button>
+            <input type="text" id="searchInput" placeholder="¿Qué servicio buscas?" onkeyup="filterServices()">
+            <button class="btn-main">BUSCAR</button>
         </div>
 
-        <div class="deck" id="deck">
+        <div class="grid" id="servicesGrid">
             </div>
     </div>
 
     <footer>
-        PATHMASTER ENGINE © 2026 // MARLON DEV
+        PLATAFORMA LOCAL © 2026 // BY MARLON DEV
     </footer>
 
     <script>
-        function generateCards() {
-            const topic = document.getElementById('topicInput').value.trim();
-            const deck = document.getElementById('deck');
+        const services = [
+            { cat: "Soporte", title: "Instalación de Windows", price: "$30k", desc: "Formateo e instalación de Windows 10/11 con drivers básicos." },
+            { cat: "Soporte", title: "Limpieza de Virus", price: "$15k", desc: "Optimización de PC lenta y eliminación de malware/anuncios." },
+            { cat: "Educación", title: "Clases de Excel", price: "$20k/h", desc: "Aprende fórmulas, tablas dinámicas y gráficos desde cero." },
+            { cat: "Diseño", title: "Tareas en PowerPoint", price: "$10k", desc: "Diseño de diapositivas profesionales para exposiciones." },
+            { cat: "Redes", title: "Configuración WiFi", price: "$15k", desc: "Configuración de routers, cambio de clave y mejora de señal." },
+            { cat: "Multimedia", title: "Edición de Video Corto", price: "$25k", desc: "Edición de Reels o TikToks con subtítulos y música." }
+        ];
+
+        function displayServices(filter = "") {
+            const grid = document.getElementById('servicesGrid');
+            grid.innerHTML = "";
             
-            if(!topic) return;
+            const filtered = services.filter(s => 
+                s.title.toLowerCase().includes(filter.toLowerCase()) || 
+                s.cat.toLowerCase().includes(filter.toLowerCase())
+            );
 
-            // Base de conocimiento dinámica
-            const cards = [
-                { 
-                    tag: "Fundamentos", 
-                    title: "Conceptos Clave", 
-                    desc: "Haz clic para descubrir los pilares básicos necesarios para dominar " + topic + "."
-                },
-                { 
-                    tag: "Herramientas", 
-                    title: "Stack Profesional", 
-                    desc: "La lista de equipo y software que los expertos usan para " + topic + "."
-                },
-                { 
-                    tag: "Práctica", 
-                    title: "Ruta de Ejecución", 
-                    desc: "Plan de acción paso a paso para pasar de novato a avanzado."
-                }
-            ];
-
-            deck.innerHTML = "";
-            cards.forEach(card => {
-                // Cada tarjeta ahora es un link real a Google
-                const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(topic + " " + card.title)}`;
-                
-                deck.innerHTML += `
-                    <a href="${searchUrl}" target="_blank" class="card">
-                        <span class="card-tag">${card.tag}</span>
-                        <div class="card-title">${card.title}</div>
-                        <div class="card-desc">${card.desc}</div>
-                    </a>
+            filtered.forEach(s => {
+                grid.innerHTML += `
+                    <div class="service-card">
+                        <span class="category">${s.cat}</span>
+                        <div class="price">${s.price}</div>
+                        <div class="title">${s.title}</div>
+                        <div class="desc">${s.desc}</div>
+                        <a href="https://wa.me/TUNUMERO" class="contact-btn">CONTRATAR AHORA</a>
+                    </div>
                 `;
             });
         }
+
+        function filterServices() {
+            const val = document.getElementById('searchInput').value;
+            displayServices(val);
+        }
+
+        // Carga inicial
+        displayServices();
     </script>
 </body>
 </html>
