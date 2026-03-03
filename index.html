@@ -3,250 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PathMaster AI | Global Success</title>
+    <title>PathMaster AI</title>
     <style>
-        :root {
-            --primary: #00d4ff;
-            --bg: #050505;
-            --card: rgba(26, 26, 26, 0.95);
-            --text: #ffffff;
-            --whatsapp: #25d366;
-        }
-
+        :root { --primary: #00d4ff; --bg: #050505; --card: #1a1a1a; --text: #ffffff; }
         body {
-            background-color: var(--bg);
-            background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-            color: var(--text);
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            background-color: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif;
+            margin: 0; display: flex; flex-direction: column; min-height: 100vh;
         }
-
-        /* LOGO PERSONALIZADO CON CÓDIGO */
-        .logo-container {
-            padding: 30px 0 10px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--primary);
-            border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            color: black;
-            box-shadow: 0 0 15px var(--primary);
-        }
-        .logo-text {
-            font-size: 1.8rem;
-            font-weight: bold;
-            letter-spacing: -1px;
-        }
-
-        header {
-            padding: 20px;
-            text-align: center;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
-        }
-
-        .live-counter {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 5px 15px;
-            background: rgba(0, 212, 255, 0.1);
-            border-radius: 20px;
-            border: 1px solid var(--primary);
-            font-size: 0.8rem;
-            color: var(--primary);
-        }
-
-        .pulse {
-            display: inline-block;
-            width: 7px;
-            height: 7px;
-            background: #ff3e3e;
-            border-radius: 50%;
-            margin-right: 5px;
-            animation: pulse-animation 1.5s infinite;
-        }
-
-        @keyframes pulse-animation {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 62, 62, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 62, 62, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 62, 62, 0); }
-        }
-
+        header { padding: 30px; text-align: center; }
+        h1 { font-size: 2.2rem; color: var(--primary); margin: 0; }
         .search-container { max-width: 500px; margin: 20px auto; padding: 0 20px; }
-        
         input {
             width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #333;
-            background: var(--card); color: white; text-align: center; margin-bottom: 15px;
-            box-sizing: border-box; outline: none;
+            background: var(--card); color: white; text-align: center; box-sizing: border-box;
         }
-
-        .suggestions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px; }
-        
-        .chip {
-            padding: 8px 15px; border-radius: 20px; font-size: 0.8rem; cursor: pointer;
-            border: 1px solid #444; background: #111;
+        button {
+            width: 100%; background: var(--primary); color: black; border: none;
+            padding: 15px; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 10px;
         }
-
         main { flex: 1; padding: 20px; max-width: 600px; margin: 0 auto; width: 100%; }
-
-        .card {
-            background: var(--card); padding: 25px; border-radius: 20px;
-            border: 1px solid #333; animation: slideIn 0.4s ease-out;
-        }
-
-        /* TESTIMONIOS */
-        .testimonials {
-            margin-top: 40px;
-            padding: 20px;
-            border-top: 1px solid #222;
-        }
-        .testimonial-card {
-            font-style: italic;
-            font-size: 0.9rem;
-            color: #aaa;
-            margin-bottom: 15px;
-            background: rgba(255,255,255,0.03);
-            padding: 15px;
-            border-radius: 10px;
-        }
-        .testimonial-author {
-            color: var(--primary);
-            font-weight: bold;
-            font-style: normal;
-            display: block;
-            margin-top: 5px;
-        }
-
-        .progress-container { background: #222; height: 8px; border-radius: 4px; margin: 15px 0; overflow: hidden; }
-        .progress-bar { background: var(--primary); width: 0%; height: 100%; transition: 0.5s; }
-
-        .step-item {
-            display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
-            padding: 10px; border-radius: 8px; background: rgba(255,255,255,0.05);
-        }
-
-        .share-btn {
-            background: var(--whatsapp); color: white; border: none; padding: 12px;
-            border-radius: 12px; font-weight: bold; width: 100%; margin-top: 10px;
-            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
-        }
-
-        footer { text-align: center; padding: 30px; font-size: 0.8rem; color: #444; }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .card { background: var(--card); padding: 25px; border-radius: 20px; border: 1px solid #333; }
+        .step-item { padding: 10px; border-bottom: 1px solid #222; font-size: 0.95rem; }
+        footer { text-align: center; padding: 20px; font-size: 0.8rem; color: #444; }
     </style>
 </head>
 <body>
 
-    <div class="logo-container">
-        <div class="logo-icon">P</div>
-        <div class="logo-text">PathMaster<span style="color:var(--primary)">AI</span></div>
-    </div>
-
     <header>
-        <div class="live-counter">
-            <span class="pulse"></span> <span id="userCount">...</span> roadmaps created today
-        </div>
+        <h1>PathMaster AI</h1>
+        <p style="color:#666">Rutas de aprendizaje para lo que necesites</p>
         <div class="search-container">
-            <input type="text" id="userGoal" placeholder="Try 'marketing' or 'design'...">
-            <div class="suggestions">
-                <span class="chip" onclick="quickSearch('coding')" style="color:#00d4ff">Coding</span>
-                <span class="chip" onclick="quickSearch('business')" style="color:#ffcc00">Business</span>
-                <span class="chip" onclick="quickSearch('english')" style="color:#ff5555">English</span>
-                <span class="chip" onclick="quickSearch('marketing')" style="color:#00ff88">Marketing</span>
-            </div>
+            <input type="text" id="userGoal" placeholder="Ej: cocina, mecanica, algoritmos...">
+            <button onclick="generatePath()">Generar Ruta</button>
         </div>
     </header>
 
     <main id="displayArea">
-        <div class="card" style="text-align:center;">
-            <h3>Ready to scale your skills?</h3>
-            <p>Select a category or type your goal to get a professional learning path.</p>
-        </div>
-
-        <div class="testimonials">
-            <div class="testimonial-card">
-                "The coding roadmap helped me land my first internship in just 3 months!"
-                <span class="testimonial-author">- Alex M., London</span>
-            </div>
-            <div class="testimonial-card">
-                "Simple, fast and effective. Best tool for self-taught learners."
-                <span class="testimonial-author">- Sofia R., Madrid</span>
-            </div>
+        <div class="card">
+            <h3>¿Qué quieres aprender hoy?</h3>
+            <p>Escribe cualquier tema y te daré los pasos para empezar.</p>
         </div>
     </main>
 
-    <footer>
-        &copy; 2026 PathMaster Global | Digital Assets by Marlon Dev<br>
-        <span style="font-size: 10px; margin-top: 10px; display: block;">Built with Precision AI Technology</span>
-    </footer>
+    <footer>&copy; 2026 PathMaster Global | Marlon Dev</footer>
 
     <script>
-        function updateCounter() {
-            const now = new Date();
-            const seed = now.getHours() * 60 + now.getMinutes();
-            const count = Math.floor(seed * 2.8) + 156;
-            document.getElementById('userCount').innerText = count.toLocaleString();
-        }
-        updateCounter();
-
         const database = {
-            "coding": { title: "Software Engineering", color: "#00d4ff", steps: ["Logic & Algorithms", "Frontend (HTML/CSS/JS)", "Backend (Node.js)", "Cloud Deployment"], url: "https://roadmap.sh" },
-            "fitness": { title: "Elite Performance", color: "#00ff88", steps: ["Mobility & Warmup", "Strength Training", "Nutrition Plan", "Recovery Hacks"], url: "https://worldcalisthenics.org" },
-            "business": { title: "Startup Founder", color: "#ffcc00", steps: ["Market Research", "Product MVP", "User Acquisition", "Global Scaling"], url: "https://entrepreneur.com" },
-            "english": { title: "Language Mastery", color: "#ff5555", steps: ["Phonetics", "Basic Grammar", "Daily Immersion", "Conversation"], url: "https://duolingo.com" },
-            "marketing": { title: "Growth Marketing", color: "#00ff88", steps: ["Content Strategy", "SEO Basics", "Paid Campaigns", "Analytics"], url: "https://hubspot.com" }
+            "cocina": { title: "Maestro Culinario", steps: ["Seguridad y cortes de cuchillo", "Técnicas de calor (herbir, freír, asar)", "Salsas madre y condimentos", "Emplatado y sabores"] },
+            "mecanica": { title: "Mecánica Automotriz", steps: ["Herramientas y seguridad", "Funcionamiento del motor", "Sistemas de frenos y suspensión", "Diagnóstico por computadora"] },
+            "electronica": { title: "Ingeniería Electrónica", steps: ["Componentes básicos (resistencias, leds)", "Leyes de Ohm y Kirchhoff", "Soldadura y circuitos impresos", "Microcontroladores (Arduino)"] },
+            "ejercicio": { title: "Entrenamiento Físico", steps: ["Evaluación de movilidad", "Rutina de fuerza básica", "Plan de nutrición", "Periodización y descanso"] },
+            "deporte": { title: "Atleta de Alto Nivel", steps: ["Fundamentos técnicos", "Resistencia cardiovascular", "Psicología deportiva", "Estrategia de juego"] },
+            "algoritmo": { title: "Pensamiento Lógico", steps: ["Variables y tipos de datos", "Estructuras de control (If, For)", "Complejidad O(n)", "Estructuras de datos avanzadas"] },
+            "marketing": { title: "Marketing Digital", steps: ["Análisis de audiencia", "Creación de contenido", "Publicidad pagada", "Métricas y optimización"] }
         };
-
-        function quickSearch(topic) {
-            document.getElementById('userGoal').value = topic;
-            generatePath();
-        }
-
-        function updateProgress() {
-            const checks = document.querySelectorAll('.step-check');
-            const checked = Array.from(checks).filter(c => c.checked).length;
-            const progress = (checked / checks.length) * 100;
-            document.getElementById('bar').style.width = progress + "%";
-        }
-
-        function shareOnWhatsApp(title) {
-            const text = `I'm using PathMaster AI to master ${title}. Join me! ${window.location.href}`;
-            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
-        }
 
         function generatePath() {
             const input = document.getElementById('userGoal').value.toLowerCase().trim();
             const display = document.getElementById('displayArea');
-            const data = database[input];
-
-            if (data) {
-                let stepsHtml = data.steps.map(step => `
-                    <div class="step-item">
-                        <input type="checkbox" class="step-check" onclick="updateProgress()">
-                        <span style="font-size:0.9rem">${step}</span>
-                    </div>
-                `).join('');
-
+            
+            // Si el tema está en la base de datos
+            if (database[input]) {
+                const data = database[input];
+                let stepsHtml = data.steps.map(s => `<div class="step-item">→ ${s}</div>`).join('');
+                display.innerHTML = `<div class="card"><h2 style="color:var(--primary)">${data.title}</h2>${stepsHtml}</div>`;
+            } 
+            // Si el tema NO está, damos una ruta universal de aprendizaje
+            else {
                 display.innerHTML = `
-                    <div class="card" style="border-top: 4px solid ${data.color}">
-                        <h2 style="color: ${data.color}; margin:0;">${data.title}</h2>
-                        <div class="progress-container"><div id="bar" class="progress-bar" style="background:${data.color}"></div></div>
-                        <div id="stepsList">${stepsHtml}</div>
-                        <button class="share-btn" onclick="shareOnWhatsApp('${data.title}')">Share Progress</button>
-                        <a href="${data.url}" target="_blank" style="text-decoration:none;">
-                            <button style="width:100%; background:transparent; color:#888; border:none; padding:10px; font-size:0.8rem; cursor:pointer;">Official Resources ↗</button>
-                        </a>
+                    <div class="card">
+                        <h2 style="color:var(--primary)">Ruta para: ${input}</h2>
+                        <div class="step-item">1. Buscar los fundamentos básicos en YouTube/Google.</div>
+                        <div class="step-item">2. Conseguir las herramientas o materiales mínimos.</div>
+                        <div class="step-item">3. Practicar la técnica básica por 20 horas.</div>
+                        <div class="step-item">4. Enseñar a alguien más lo aprendido para reforzar.</div>
+                        <p style="font-size:0.8rem; color:#666; margin-top:15px;">Este es un plan general para temas nuevos.</p>
                     </div>
                 `;
             }
