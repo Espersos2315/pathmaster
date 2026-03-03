@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PathMaster | Neural Cards</title>
+    <title>PathMaster AI | Neural Interface</title>
     <style>
         :root {
             --bg: #000000;
-            --accent: #7000ff; /* Púrpura eléctrico */
-            --card-bg: #111;
+            --accent: #00d4ff;
+            --card-bg: #0a0a0a;
+            --border: #1a1a1a;
             --text: #ffffff;
         }
 
         body {
             background-color: var(--bg);
             color: var(--text);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             margin: 0;
             display: flex;
             flex-direction: column;
@@ -24,141 +25,181 @@
             padding: 20px;
         }
 
-        .hero {
+        .container {
+            width: 100%;
+            max-width: 900px;
             text-align: center;
-            margin-top: 50px;
-            max-width: 600px;
+            margin-top: 60px;
         }
 
         h1 {
-            font-size: 3rem;
-            letter-spacing: -2px;
-            background: linear-gradient(to right, #fff, var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -3px;
+            margin: 0;
+            color: var(--text);
         }
 
-        .input-box {
+        p.subtitle {
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        .input-group {
             background: var(--card-bg);
-            border: 1px solid #333;
-            padding: 5px;
-            border-radius: 50px;
+            border: 1px solid var(--border);
+            padding: 8px;
+            border-radius: 16px;
             display: flex;
-            width: 100%;
-            max-width: 400px;
-            margin: 30px auto;
+            max-width: 500px;
+            margin: 0 auto 50px auto;
+            transition: 0.3s;
+        }
+
+        .input-group:focus-within {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
         }
 
         input {
             background: transparent;
             border: none;
             color: white;
-            padding: 15px 20px;
+            padding: 12px 20px;
             flex: 1;
             outline: none;
             font-size: 1rem;
         }
 
-        .btn-gen {
+        .btn-main {
             background: var(--accent);
             border: none;
-            color: white;
-            padding: 10px 25px;
-            border-radius: 50px;
+            color: black;
+            padding: 0 25px;
+            border-radius: 12px;
             font-weight: bold;
             cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-main:hover {
+            transform: scale(1.05);
+            background: #fff;
         }
 
         .deck {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             width: 100%;
-            max-width: 900px;
-            margin-top: 20px;
         }
 
-        .flashcard {
+        .card {
             background: var(--card-bg);
-            border: 1px solid #222;
+            border: 1px solid var(--border);
             padding: 30px;
-            border-radius: 24px;
-            transition: 0.4s;
+            border-radius: 20px;
+            text-align: left;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
 
-        .flashcard:hover {
+        .card:hover {
             border-color: var(--accent);
-            transform: translateY(-10px);
+            background: #0d0d0d;
+            transform: translateY(-8px);
         }
 
-        .card-num {
-            font-size: 0.8rem;
+        .card-tag {
+            font-size: 0.7rem;
             color: var(--accent);
-            font-weight: bold;
-            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            display: block;
         }
 
         .card-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 15px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
         }
 
-        .card-content {
-            color: #888;
+        .card-desc {
             font-size: 0.9rem;
-            line-height: 1.6;
+            color: #777;
+            line-height: 1.5;
         }
 
-        footer { margin-top: auto; padding: 40px; color: #333; font-size: 0.8rem; }
+        footer {
+            margin-top: auto;
+            padding: 60px 20px;
+            color: #222;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="hero">
-        <h1>PathMaster AI</h1>
-        <p style="color:#555">Transforma cualquier tema en un sistema de aprendizaje visual.</p>
-    </div>
+    <div class="container">
+        <h1>PathMaster</h1>
+        <p class="subtitle">Decodifica cualquier habilidad en segundos.</p>
 
-    <div class="input-box">
-        <input type="text" id="topic" placeholder="¿Qué quieres dominar?">
-        <button class="btn-gen" onclick="generateCards()">GENERAR</button>
-    </div>
-
-    <div class="deck" id="deck">
+        <div class="input-group">
+            <input type="text" id="topicInput" placeholder="¿Qué quieres aprender?" onkeydown="if(event.key === 'Enter') generateCards()">
+            <button class="btn-main" onclick="generateCards()">GENERAR</button>
         </div>
 
+        <div class="deck" id="deck">
+            </div>
+    </div>
+
     <footer>
-        DESIGNED BY GEMINI AI // OWNED BY MARLON_DEV
+        PATHMASTER ENGINE © 2026 // MARLON DEV
     </footer>
 
     <script>
         function generateCards() {
-            const topic = document.getElementById('topic').value;
+            const topic = document.getElementById('topicInput').value.trim();
             const deck = document.getElementById('deck');
             
             if(!topic) return;
 
-            // La IA decide la estructura de aprendizaje perfecta
-            const templates = [
-                { t: "Fundamentos Nucleares", c: "Los conceptos base que sostienen todo el conocimiento sobre " + topic + "." },
-                { t: "Herramientas de Poder", c: "El software o materiales críticos que necesitas para ejecutar " + topic + " a nivel pro." },
-                { t: "La Regla del 80/20", c: "El 20% de la información sobre " + topic + " que te dará el 80% de los resultados." },
-                { t: "Errores de Novato", c: "Lo que el 90% hace mal al empezar y cómo tú puedes evitarlo." }
+            // Base de conocimiento dinámica
+            const cards = [
+                { 
+                    tag: "Fundamentos", 
+                    title: "Conceptos Clave", 
+                    desc: "Haz clic para descubrir los pilares básicos necesarios para dominar " + topic + "."
+                },
+                { 
+                    tag: "Herramientas", 
+                    title: "Stack Profesional", 
+                    desc: "La lista de equipo y software que los expertos usan para " + topic + "."
+                },
+                { 
+                    tag: "Práctica", 
+                    title: "Ruta de Ejecución", 
+                    desc: "Plan de acción paso a paso para pasar de novato a avanzado."
+                }
             ];
 
             deck.innerHTML = "";
-            templates.forEach((card, i) => {
+            cards.forEach(card => {
+                // Cada tarjeta ahora es un link real a Google
+                const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(topic + " " + card.title)}`;
+                
                 deck.innerHTML += `
-                    <div class="flashcard">
-                        <div class="card-num">MODULO 0${i+1}</div>
-                        <div class="card-title">${card.t}</div>
-                        <div class="card-content">${card.c}</div>
-                    </div>
+                    <a href="${searchUrl}" target="_blank" class="card">
+                        <span class="card-tag">${card.tag}</span>
+                        <div class="card-title">${card.title}</div>
+                        <div class="card-desc">${card.desc}</div>
+                    </a>
                 `;
             });
         }
