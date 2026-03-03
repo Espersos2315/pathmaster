@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PathMaster AI | Global Roadmaps</title>
+    <title>PathMaster AI | Global Success</title>
     <style>
         :root {
             --primary: #00d4ff;
             --bg: #050505;
-            --card: rgba(26, 26, 26, 0.9);
+            --card: rgba(26, 26, 26, 0.95);
             --text: #ffffff;
+            --whatsapp: #25d366;
         }
 
         body {
             background-color: var(--bg);
-            /* Imagen de fondo tecnológica ligera */
             background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
             color: var(--text);
             font-family: 'Segoe UI', sans-serif;
@@ -24,156 +24,233 @@
             min-height: 100vh;
         }
 
+        /* LOGO PERSONALIZADO CON CÓDIGO */
+        .logo-container {
+            padding: 30px 0 10px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: black;
+            box-shadow: 0 0 15px var(--primary);
+        }
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: -1px;
+        }
+
         header {
-            padding: 50px 20px;
+            padding: 20px;
             text-align: center;
             background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
         }
 
-        h1 {
-            font-size: 2.8rem;
+        .live-counter {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 15px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 20px;
+            border: 1px solid var(--primary);
+            font-size: 0.8rem;
             color: var(--primary);
-            margin: 0;
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
         }
 
-        .search-container {
-            max-width: 500px;
-            margin: 25px auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            padding: 0 20px;
+        .pulse {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            background: #ff3e3e;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: pulse-animation 1.5s infinite;
         }
 
+        @keyframes pulse-animation {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 62, 62, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 62, 62, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 62, 62, 0); }
+        }
+
+        .search-container { max-width: 500px; margin: 20px auto; padding: 0 20px; }
+        
         input {
-            padding: 18px;
-            border-radius: 12px;
-            border: 1px solid #333;
-            background: var(--card);
-            color: white;
-            font-size: 1rem;
-            outline: none;
-            text-align: center;
+            width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #333;
+            background: var(--card); color: white; text-align: center; margin-bottom: 15px;
+            box-sizing: border-box; outline: none;
         }
 
-        button {
-            background: var(--primary);
-            color: black;
-            border: none;
-            padding: 18px;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        .suggestions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px; }
+        
+        .chip {
+            padding: 8px 15px; border-radius: 20px; font-size: 0.8rem; cursor: pointer;
+            border: 1px solid #444; background: #111;
         }
 
-        main {
-            flex: 1;
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            width: 100%;
-        }
+        main { flex: 1; padding: 20px; max-width: 600px; margin: 0 auto; width: 100%; }
 
         .card {
-            background: var(--card);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid #333;
-            backdrop-filter: blur(5px);
-            animation: slideIn 0.4s ease-out;
+            background: var(--card); padding: 25px; border-radius: 20px;
+            border: 1px solid #333; animation: slideIn 0.4s ease-out;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        footer {
-            text-align: center;
+        /* TESTIMONIOS */
+        .testimonials {
+            margin-top: 40px;
             padding: 20px;
-            font-size: 0.8rem;
-            color: #444;
+            border-top: 1px solid #222;
+        }
+        .testimonial-card {
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 15px;
+            background: rgba(255,255,255,0.03);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .testimonial-author {
+            color: var(--primary);
+            font-weight: bold;
+            font-style: normal;
+            display: block;
+            margin-top: 5px;
         }
 
-        /* Estilo para los links de los pasos */
-        .step-list {
-            text-align: left;
-            line-height: 1.8;
-            margin: 20px 0;
+        .progress-container { background: #222; height: 8px; border-radius: 4px; margin: 15px 0; overflow: hidden; }
+        .progress-bar { background: var(--primary); width: 0%; height: 100%; transition: 0.5s; }
+
+        .step-item {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+            padding: 10px; border-radius: 8px; background: rgba(255,255,255,0.05);
         }
+
+        .share-btn {
+            background: var(--whatsapp); color: white; border: none; padding: 12px;
+            border-radius: 12px; font-weight: bold; width: 100%; margin-top: 10px;
+            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+
+        footer { text-align: center; padding: 30px; font-size: 0.8rem; color: #444; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
+    <div class="logo-container">
+        <div class="logo-icon">P</div>
+        <div class="logo-text">PathMaster<span style="color:var(--primary)">AI</span></div>
+    </div>
+
     <header>
-        <h1>PathMaster AI</h1>
-        <p style="color: #888;">Global Knowledge Accelerator</p>
-        
+        <div class="live-counter">
+            <span class="pulse"></span> <span id="userCount">...</span> roadmaps created today
+        </div>
         <div class="search-container">
-            <input type="text" id="userGoal" placeholder="Example: coding, fitness, business">
-            <button onclick="generatePath()">Build My Roadmap</button>
+            <input type="text" id="userGoal" placeholder="Try 'marketing' or 'design'...">
+            <div class="suggestions">
+                <span class="chip" onclick="quickSearch('coding')" style="color:#00d4ff">Coding</span>
+                <span class="chip" onclick="quickSearch('business')" style="color:#ffcc00">Business</span>
+                <span class="chip" onclick="quickSearch('english')" style="color:#ff5555">English</span>
+                <span class="chip" onclick="quickSearch('marketing')" style="color:#00ff88">Marketing</span>
+            </div>
         </div>
     </header>
 
     <main id="displayArea">
-        <div class="card">
-            <h3>Ready to start?</h3>
-            <p>Type a global skill above to get a step-by-step professional guide.</p>
+        <div class="card" style="text-align:center;">
+            <h3>Ready to scale your skills?</h3>
+            <p>Select a category or type your goal to get a professional learning path.</p>
+        </div>
+
+        <div class="testimonials">
+            <div class="testimonial-card">
+                "The coding roadmap helped me land my first internship in just 3 months!"
+                <span class="testimonial-author">- Alex M., London</span>
+            </div>
+            <div class="testimonial-card">
+                "Simple, fast and effective. Best tool for self-taught learners."
+                <span class="testimonial-author">- Sofia R., Madrid</span>
+            </div>
         </div>
     </main>
 
     <footer>
-        &copy; 2026 PathMaster Global | Digital Assets by Marlon Dev
+        &copy; 2026 PathMaster Global | Digital Assets by Marlon Dev<br>
+        <span style="font-size: 10px; margin-top: 10px; display: block;">Built with Precision AI Technology</span>
     </footer>
 
     <script>
+        function updateCounter() {
+            const now = new Date();
+            const seed = now.getHours() * 60 + now.getMinutes();
+            const count = Math.floor(seed * 2.8) + 156;
+            document.getElementById('userCount').innerText = count.toLocaleString();
+        }
+        updateCounter();
+
         const database = {
-            "coding": {
-                title: "Software Engineering",
-                content: "1. Logic & Algorithms<br>2. Frontend (HTML/CSS/JS)<br>3. Backend (Node.js/Python)<br>4. Cloud & Deployment",
-                url: "https://roadmap.sh"
-            },
-            "fitness": {
-                title: "Elite Performance",
-                content: "1. Mobility Foundations<br>2. Strength Training<br>3. Macros & Micronutrients<br>4. Sleep & Recovery Biohacks",
-                url: "https://www.worldcalisthenics.org"
-            },
-            "business": {
-                title: "Startup Founder",
-                content: "1. Problem Identification<br>2. Business Model Canvas<br>3. Customer Acquisition<br>4. Global Scaling",
-                url: "https://www.entrepreneur.com"
-            }
+            "coding": { title: "Software Engineering", color: "#00d4ff", steps: ["Logic & Algorithms", "Frontend (HTML/CSS/JS)", "Backend (Node.js)", "Cloud Deployment"], url: "https://roadmap.sh" },
+            "fitness": { title: "Elite Performance", color: "#00ff88", steps: ["Mobility & Warmup", "Strength Training", "Nutrition Plan", "Recovery Hacks"], url: "https://worldcalisthenics.org" },
+            "business": { title: "Startup Founder", color: "#ffcc00", steps: ["Market Research", "Product MVP", "User Acquisition", "Global Scaling"], url: "https://entrepreneur.com" },
+            "english": { title: "Language Mastery", color: "#ff5555", steps: ["Phonetics", "Basic Grammar", "Daily Immersion", "Conversation"], url: "https://duolingo.com" },
+            "marketing": { title: "Growth Marketing", color: "#00ff88", steps: ["Content Strategy", "SEO Basics", "Paid Campaigns", "Analytics"], url: "https://hubspot.com" }
         };
+
+        function quickSearch(topic) {
+            document.getElementById('userGoal').value = topic;
+            generatePath();
+        }
+
+        function updateProgress() {
+            const checks = document.querySelectorAll('.step-check');
+            const checked = Array.from(checks).filter(c => c.checked).length;
+            const progress = (checked / checks.length) * 100;
+            document.getElementById('bar').style.width = progress + "%";
+        }
+
+        function shareOnWhatsApp(title) {
+            const text = `I'm using PathMaster AI to master ${title}. Join me! ${window.location.href}`;
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+        }
 
         function generatePath() {
             const input = document.getElementById('userGoal').value.toLowerCase().trim();
             const display = document.getElementById('displayArea');
+            const data = database[input];
 
-            if (database[input]) {
-                const item = database[input];
-                display.innerHTML = `
-                    <div class="card">
-                        <h2 style="color: var(--primary); margin:0;">${item.title}</h2>
-                        <div class="step-list">${item.content}</div>
-                        <a href="${item.url}" target="_blank" style="text-decoration:none;">
-                            <button style="width:100%">Access Global Resources</button>
-                        </a>
+            if (data) {
+                let stepsHtml = data.steps.map(step => `
+                    <div class="step-item">
+                        <input type="checkbox" class="step-check" onclick="updateProgress()">
+                        <span style="font-size:0.9rem">${step}</span>
                     </div>
-                `;
-            } else {
+                `).join('');
+
                 display.innerHTML = `
-                    <div class="card">
-                        <h3>Topic not found yet</h3>
-                        <p>Try with: <b>coding</b>, <b>fitness</b>, or <b>business</b>. We are adding more every day.</p>
-                        <button onclick="location.reload()" style="width:100%; background:#444; color:white;">Try Again</button>
+                    <div class="card" style="border-top: 4px solid ${data.color}">
+                        <h2 style="color: ${data.color}; margin:0;">${data.title}</h2>
+                        <div class="progress-container"><div id="bar" class="progress-bar" style="background:${data.color}"></div></div>
+                        <div id="stepsList">${stepsHtml}</div>
+                        <button class="share-btn" onclick="shareOnWhatsApp('${data.title}')">Share Progress</button>
+                        <a href="${data.url}" target="_blank" style="text-decoration:none;">
+                            <button style="width:100%; background:transparent; color:#888; border:none; padding:10px; font-size:0.8rem; cursor:pointer;">Official Resources ↗</button>
+                        </a>
                     </div>
                 `;
             }
         }
     </script>
 </body>
-  </html>
-  
+</html>
