@@ -1,86 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PathMaster AI</title>
+    <title>PathMaster | Focus Terminal</title>
     <style>
-        :root { --primary: #00d4ff; --bg: #050505; --card: #1a1a1a; --text: #ffffff; }
+        :root {
+            --accent: #ff3e3e; /* Rojo neón para urgencia y enfoque */
+            --bg: #0a0a0a;
+            --surface: #111111;
+            --text: #e0e0e0;
+        }
+
         body {
-            background-color: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif;
-            margin: 0; display: flex; flex-direction: column; min-height: 100vh;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Courier New', Courier, monospace; /* Estilo terminal */
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
         }
-        header { padding: 30px; text-align: center; }
-        h1 { font-size: 2.2rem; color: var(--primary); margin: 0; }
-        .search-container { max-width: 500px; margin: 20px auto; padding: 0 20px; }
+
+        .terminal-header {
+            text-align: left;
+            width: 100%;
+            max-width: 500px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .timer-display {
+            font-size: 5rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-shadow: 0 0 20px rgba(255, 62, 62, 0.3);
+            margin: 20px 0;
+        }
+
+        .controls button {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 10px 20px;
+            font-family: inherit;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 5px;
+        }
+
+        .controls button:hover {
+            background: var(--accent);
+            color: black;
+        }
+
+        .task-section {
+            width: 100%;
+            max-width: 500px;
+            background: var(--surface);
+            padding: 20px;
+            border-radius: 4px;
+            border: 1px solid #222;
+        }
+
         input {
-            width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #333;
-            background: var(--card); color: white; text-align: center; box-sizing: border-box;
+            width: 70%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #444;
+            color: white;
+            padding: 10px;
+            outline: none;
         }
-        button {
-            width: 100%; background: var(--primary); color: black; border: none;
-            padding: 15px; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 10px;
+
+        .task-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
         }
-        main { flex: 1; padding: 20px; max-width: 600px; margin: 0 auto; width: 100%; }
-        .card { background: var(--card); padding: 25px; border-radius: 20px; border: 1px solid #333; }
-        .step-item { padding: 10px; border-bottom: 1px solid #222; font-size: 0.95rem; }
-        footer { text-align: center; padding: 20px; font-size: 0.8rem; color: #444; }
+
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #1a1a1a;
+            font-size: 0.9rem;
+        }
+
+        .done { text-decoration: line-through; color: #555; }
+
+        footer {
+            margin-top: auto;
+            font-size: 0.7rem;
+            color: #444;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>PathMaster AI</h1>
-        <p style="color:#666">Rutas de aprendizaje para lo que necesites</p>
-        <div class="search-container">
-            <input type="text" id="userGoal" placeholder="Ej: cocina, mecanica, algoritmos...">
-            <button onclick="generatePath()">Generar Ruta</button>
-        </div>
-    </header>
+    <div class="terminal-header">
+        <div>> SYSTEM: ONLINE</div>
+        <div>> USER: MARLON_DEV</div>
+        <div style="color: var(--accent)">> STATUS: FOCUS_MODE_ACTIVE</div>
+    </div>
 
-    <main id="displayArea">
-        <div class="card">
-            <h3>¿Qué quieres aprender hoy?</h3>
-            <p>Escribe cualquier tema y te daré los pasos para empezar.</p>
-        </div>
-    </main>
+    <div class="timer-display" id="timer">25:00</div>
 
-    <footer>&copy; 2026 PathMaster Global | Marlon Dev</footer>
+    <div class="controls">
+        <button onclick="toggleTimer()">START / STOP</button>
+        <button onclick="resetTimer()">RESET</button>
+    </div>
+
+    <div class="task-section">
+        <div style="margin-bottom: 15px;">// PRIORIDADES_DEL_DÍA</div>
+        <input type="text" id="taskInput" placeholder="Añadir objetivo...">
+        <button onclick="addTask()" style="width: 25%; padding: 10px;">+</button>
+        <ul class="task-list" id="taskList"></ul>
+    </div>
+
+    <footer>
+        PATHMASTER TERMINAL v2.0 // NO DISTRACTIONS ALLOWED
+    </footer>
 
     <script>
-        const database = {
-            "cocina": { title: "Maestro Culinario", steps: ["Seguridad y cortes de cuchillo", "Técnicas de calor (herbir, freír, asar)", "Salsas madre y condimentos", "Emplatado y sabores"] },
-            "mecanica": { title: "Mecánica Automotriz", steps: ["Herramientas y seguridad", "Funcionamiento del motor", "Sistemas de frenos y suspensión", "Diagnóstico por computadora"] },
-            "electronica": { title: "Ingeniería Electrónica", steps: ["Componentes básicos (resistencias, leds)", "Leyes de Ohm y Kirchhoff", "Soldadura y circuitos impresos", "Microcontroladores (Arduino)"] },
-            "ejercicio": { title: "Entrenamiento Físico", steps: ["Evaluación de movilidad", "Rutina de fuerza básica", "Plan de nutrición", "Periodización y descanso"] },
-            "deporte": { title: "Atleta de Alto Nivel", steps: ["Fundamentos técnicos", "Resistencia cardiovascular", "Psicología deportiva", "Estrategia de juego"] },
-            "algoritmo": { title: "Pensamiento Lógico", steps: ["Variables y tipos de datos", "Estructuras de control (If, For)", "Complejidad O(n)", "Estructuras de datos avanzadas"] },
-            "marketing": { title: "Marketing Digital", steps: ["Análisis de audiencia", "Creación de contenido", "Publicidad pagada", "Métricas y optimización"] }
-        };
+        // Lógica del Temporizador (Pomodoro)
+        let timeLeft = 25 * 60;
+        let timerId = null;
 
-        function generatePath() {
-            const input = document.getElementById('userGoal').value.toLowerCase().trim();
-            const display = document.getElementById('displayArea');
-            
-            // Si el tema está en la base de datos
-            if (database[input]) {
-                const data = database[input];
-                let stepsHtml = data.steps.map(s => `<div class="step-item">→ ${s}</div>`).join('');
-                display.innerHTML = `<div class="card"><h2 style="color:var(--primary)">${data.title}</h2>${stepsHtml}</div>`;
-            } 
-            // Si el tema NO está, damos una ruta universal de aprendizaje
-            else {
-                display.innerHTML = `
-                    <div class="card">
-                        <h2 style="color:var(--primary)">Ruta para: ${input}</h2>
-                        <div class="step-item">1. Buscar los fundamentos básicos en YouTube/Google.</div>
-                        <div class="step-item">2. Conseguir las herramientas o materiales mínimos.</div>
-                        <div class="step-item">3. Practicar la técnica básica por 20 horas.</div>
-                        <div class="step-item">4. Enseñar a alguien más lo aprendido para reforzar.</div>
-                        <p style="font-size:0.8rem; color:#666; margin-top:15px;">Este es un plan general para temas nuevos.</p>
-                    </div>
-                `;
+        function updateDisplay() {
+            const mins = Math.floor(timeLeft / 60);
+            const secs = timeLeft % 60;
+            document.getElementById('timer').innerText = 
+                `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function toggleTimer() {
+            if (timerId) {
+                clearInterval(timerId);
+                timerId = null;
+            } else {
+                timerId = setInterval(() => {
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        updateDisplay();
+                    }
+                }, 1000);
             }
+        }
+
+        function resetTimer() {
+            clearInterval(timerId);
+            timerId = null;
+            timeLeft = 25 * 60;
+            updateDisplay();
+        }
+
+        // Lógica de Tareas
+        function addTask() {
+            const input = document.getElementById('taskInput');
+            if (input.value.trim() === "") return;
+
+            const li = document.createElement('li');
+            li.className = 'task-item';
+            li.innerHTML = `
+                <span onclick="this.classList.toggle('done')">${input.value}</span>
+                <span onclick="this.parentElement.remove()" style="cursor:pointer; color:red">X</span>
+            `;
+            document.getElementById('taskList').appendChild(li);
+            input.value = "";
         }
     </script>
 </body>
