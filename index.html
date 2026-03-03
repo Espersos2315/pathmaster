@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PathMaster AI | Global Roadmaps</title>
+    <style>
+        :root {
+            --primary: #00d4ff;
+            --bg: #050505;
+            --card: rgba(26, 26, 26, 0.9);
+            --text: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg);
+            /* Imagen de fondo tecnológica ligera */
+            background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            color: var(--text);
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            padding: 50px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin: 0;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        .search-container {
+            max-width: 500px;
+            margin: 25px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 0 20px;
+        }
+
+        input {
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            background: var(--card);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            text-align: center;
+        }
+
+        button {
+            background: var(--primary);
+            color: black;
+            border: none;
+            padding: 18px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .card {
+            background: var(--card);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #333;
+            backdrop-filter: blur(5px);
+            animation: slideIn 0.4s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #444;
+        }
+
+        /* Estilo para los links de los pasos */
+        .step-list {
+            text-align: left;
+            line-height: 1.8;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>PathMaster AI</h1>
+        <p style="color: #888;">Global Knowledge Accelerator</p>
+        
+        <div class="search-container">
+            <input type="text" id="userGoal" placeholder="Example: coding, fitness, business">
+            <button onclick="generatePath()">Build My Roadmap</button>
+        </div>
+    </header>
+
+    <main id="displayArea">
+        <div class="card">
+            <h3>Ready to start?</h3>
+            <p>Type a global skill above to get a step-by-step professional guide.</p>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 PathMaster Global | Digital Assets by Marlon Dev
+    </footer>
+
+    <script>
+        const database = {
+            "coding": {
+                title: "Software Engineering",
+                content: "1. Logic & Algorithms<br>2. Frontend (HTML/CSS/JS)<br>3. Backend (Node.js/Python)<br>4. Cloud & Deployment",
+                url: "https://roadmap.sh"
+            },
+            "fitness": {
+                title: "Elite Performance",
+                content: "1. Mobility Foundations<br>2. Strength Training<br>3. Macros & Micronutrients<br>4. Sleep & Recovery Biohacks",
+                url: "https://www.worldcalisthenics.org"
+            },
+            "business": {
+                title: "Startup Founder",
+                content: "1. Problem Identification<br>2. Business Model Canvas<br>3. Customer Acquisition<br>4. Global Scaling",
+                url: "https://www.entrepreneur.com"
+            }
+        };
+
+        function generatePath() {
+            const input = document.getElementById('userGoal').value.toLowerCase().trim();
+            const display = document.getElementById('displayArea');
+
+            if (database[input]) {
+                const item = database[input];
+                display.innerHTML = `
+                    <div class="card">
+                        <h2 style="color: var(--primary); margin:0;">${item.title}</h2>
+                        <div class="step-list">${item.content}</div>
+                        <a href="${item.url}" target="_blank" style="text-decoration:none;">
+                            <button style="width:100%">Access Global Resources</button>
+                        </a>
+                    </div>
+                `;
+            } else {
+                display.innerHTML = `
+                    <div class="card">
+                        <h3>Topic not found yet</h3>
+                        <p>Try with: <b>coding</b>, <b>fitness</b>, or <b>business</b>. We are adding more every day.</p>
+                        <button onclick="location.reload()" style="width:100%; background:#444; color:white;">Try Again</button>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+  </html>
+  
