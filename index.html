@@ -3,225 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PathMaster | Local Services</title>
+    <title>PathMaster | IA Hub</title>
     <style>
         :root {
-            --bg: #000000;
-            --accent: #00ff88; /* Verde neón: color de dinero y servicios */
-            --card-bg: #0a0a0a;
-            --border: #1a1a1a;
+            --bg: #050505;
+            --accent: #ff0055; /* Rosa Neón: Moderno y disruptivo */
+            --card: #111;
             --text: #ffffff;
         }
 
         body {
             background-color: var(--bg);
             color: var(--text);
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Inter', sans-serif;
             margin: 0;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 900px;
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .badge {
-            background: rgba(0, 255, 136, 0.1);
-            color: var(--accent);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-            border: 1px solid var(--accent);
         }
 
         h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            letter-spacing: -2px;
-            margin: 15px 0 5px 0;
+            font-size: 3.5rem;
+            margin: 40px 0 10px 0;
+            letter-spacing: -3px;
         }
 
-        p.subtitle {
+        .description {
             color: #666;
-            margin-bottom: 40px;
-        }
-
-        .input-group {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 8px;
-            border-radius: 16px;
-            display: flex;
-            max-width: 500px;
-            margin: 0 auto 50px auto;
-        }
-
-        input {
-            background: transparent;
-            border: none;
-            color: white;
-            padding: 12px 20px;
-            flex: 1;
-            outline: none;
-            font-size: 1rem;
-        }
-
-        .btn-main {
-            background: var(--accent);
-            border: none;
-            color: black;
-            padding: 0 25px;
-            border-radius: 12px;
-            font-weight: bold;
-            cursor: pointer;
+            margin-bottom: 50px;
+            text-align: center;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             width: 100%;
+            max-width: 1000px;
         }
 
-        .service-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
+        .ai-card {
+            background: var(--card);
+            border: 1px solid #222;
             padding: 25px;
             border-radius: 20px;
-            text-align: left;
-            transition: 0.3s;
-            position: relative;
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .service-card:hover {
+        .ai-card:hover {
             border-color: var(--accent);
-            transform: translateY(-5px);
+            transform: scale(1.02);
+            background: #161616;
         }
 
-        .price {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            color: var(--accent);
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        .category {
+        .tag {
             font-size: 0.7rem;
-            color: #555;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            display: block;
+            background: rgba(255, 0, 85, 0.1);
+            color: var(--accent);
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-weight: bold;
         }
 
         .title {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin: 15px 0 10px 0;
         }
 
         .desc {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #888;
-            margin-bottom: 20px;
             line-height: 1.5;
         }
 
-        .contact-btn {
-            display: block;
-            text-align: center;
-            background: #111;
-            color: white;
-            padding: 10px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-size: 0.8rem;
-            border: 1px solid #222;
-            transition: 0.3s;
-        }
-
-        .contact-btn:hover {
-            background: var(--accent);
-            color: black;
+        .launch-icon {
+            float: right;
+            opacity: 0.3;
         }
 
         footer {
-            margin-top: auto;
-            padding: 40px;
-            color: #333;
+            margin-top: 80px;
+            color: #222;
             font-size: 0.8rem;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <span class="badge">DISPONIBLE EN TU CIUDAD</span>
-        <h1>LocalServices</h1>
-        <p class="subtitle">Micro-servicios digitales rápidos y garantizados.</p>
+    <h1>PathMaster<span style="color:var(--accent)">.</span></h1>
+    <p class="description">Las mejores herramientas de IA para dominar el mundo digital.</p>
 
-        <div class="input-group">
-            <input type="text" id="searchInput" placeholder="¿Qué servicio buscas?" onkeyup="filterServices()">
-            <button class="btn-main">BUSCAR</button>
-        </div>
+    <div class="grid">
+        <a href="https://chatgpt.com" target="_blank" class="ai-card">
+            <span class="tag">TEXTO</span>
+            <div class="title">ChatGPT</div>
+            <p class="desc">El estándar de oro para redactar, programar y resolver dudas al instante.</p>
+        </a>
 
-        <div class="grid" id="servicesGrid">
-            </div>
+        <a href="https://leonardo.ai" target="_blank" class="ai-card">
+            <span class="tag">IMAGEN</span>
+            <div class="title">Leonardo AI</div>
+            <p class="desc">Generación de imágenes profesionales y arte digital de alta calidad gratis.</p>
+        </a>
+
+        <a href="https://gamma.app" target="_blank" class="ai-card">
+            <span class="tag">PRESENTACIONES</span>
+            <div class="title">Gamma App</div>
+            <p class="desc">Crea diapositivas y páginas web enteras solo escribiendo una frase.</p>
+        </a>
+
+        <a href="https://vocalremover.org/es/" target="_blank" class="ai-card">
+            <span class="tag">AUDIO</span>
+            <div class="title">Vocal Remover</div>
+            <p class="desc">Separa la voz de la música de cualquier canción con precisión quirúrgica.</p>
+        </a>
+
+        <a href="https://www.perplexity.ai" target="_blank" class="ai-card">
+            <span class="tag">BÚSQUEDA</span>
+            <div class="title">Perplexity</div>
+            <p class="desc">El buscador que reemplazará a Google. Respuestas directas con fuentes reales.</p>
+        </a>
+
+        <a href="https://capcut.com" target="_blank" class="ai-card">
+            <span class="tag">VIDEO</span>
+            <div class="title">CapCut Web</div>
+            <p class="desc">Edición de video con funciones de IA como subtítulos automáticos y recortes.</p>
+        </a>
     </div>
 
-    <footer>
-        PLATAFORMA LOCAL © 2026 // BY MARLON DEV
-    </footer>
+    <footer>BY MARLON DEV // 2026</footer>
 
-    <script>
-        const services = [
-            { cat: "Soporte", title: "Instalación de Windows", price: "$30k", desc: "Formateo e instalación de Windows 10/11 con drivers básicos." },
-            { cat: "Soporte", title: "Limpieza de Virus", price: "$15k", desc: "Optimización de PC lenta y eliminación de malware/anuncios." },
-            { cat: "Educación", title: "Clases de Excel", price: "$20k/h", desc: "Aprende fórmulas, tablas dinámicas y gráficos desde cero." },
-            { cat: "Diseño", title: "Tareas en PowerPoint", price: "$10k", desc: "Diseño de diapositivas profesionales para exposiciones." },
-            { cat: "Redes", title: "Configuración WiFi", price: "$15k", desc: "Configuración de routers, cambio de clave y mejora de señal." },
-            { cat: "Multimedia", title: "Edición de Video Corto", price: "$25k", desc: "Edición de Reels o TikToks con subtítulos y música." }
-        ];
-
-        function displayServices(filter = "") {
-            const grid = document.getElementById('servicesGrid');
-            grid.innerHTML = "";
-            
-            const filtered = services.filter(s => 
-                s.title.toLowerCase().includes(filter.toLowerCase()) || 
-                s.cat.toLowerCase().includes(filter.toLowerCase())
-            );
-
-            filtered.forEach(s => {
-                grid.innerHTML += `
-                    <div class="service-card">
-                        <span class="category">${s.cat}</span>
-                        <div class="price">${s.price}</div>
-                        <div class="title">${s.title}</div>
-                        <div class="desc">${s.desc}</div>
-                        <a href="https://wa.me/TUNUMERO" class="contact-btn">CONTRATAR AHORA</a>
-                    </div>
-                `;
-            });
-        }
-
-        function filterServices() {
-            const val = document.getElementById('searchInput').value;
-            displayServices(val);
-        }
-
-        // Carga inicial
-        displayServices();
-    </script>
 </body>
 </html>
